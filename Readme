@@ -227,7 +227,22 @@ MariaDB [lpecom_bdd]> select max(note) from lpecom_examens where id_examen = 87;
 Quelle requête utiliser pour afficher l'id des étudiants qui ont eu plus de 11 à l'examen 45 ou plus de
 12 à l'examen 87 ?
 
-Requête à saisir :
+- Requête à saisir :
+select id_etudiant from lpecom_examens where id_examen = 45 and note > 11 or (id_examen = 87 and note > 12);
+
+- Resultat :
+MariaDB [lpecom_bdd]> select id_etudiant from lpecom_examens where id_examen = 45 and note > 11 or (id_examen = 87 and note > 12);
++-------------+
+| id_etudiant |
++-------------+
+|          33 |
+|          31 |
+|          31 |
+|          36 |
+|          34 |
++-------------+
+
+
 
 
 
