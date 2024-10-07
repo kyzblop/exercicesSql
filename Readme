@@ -179,7 +179,55 @@ MariaDB [lpecom_bdd]> select distinct id_etudiant from lpecom_examens;
 Quelle requête utiliser pour compter le nombre d'étudiants qui ont participé à au moins un examen ?
 
 - Requête à saisir :
-select distinct count(id_etudiant) from lpecom_etudiant;
+select count(distinct id_etudiant) from lpecom_examens;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select count(distinct id_etudiant) from lpecom_examens;
++-----------------------------+
+| count(distinct id_etudiant) |
++-----------------------------+
+|                           6 |
++-----------------------------+
+
+
+
+	Exercice 3
+Quelle requête utiliser pour calculer la moyenne de l'examen portant l'id : 45 ?
+
+- Requête à saisir :
+select avg(note) from lpecom_examens where id_examen = 45;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select avg(note) from lpecom_examens where id_examen = 45;
++-----------+
+| avg(note) |
++-----------+
+|     12.25 |
++-----------+
+
+
+
+	Exercice 4
+Quelle requête utiliser pour récupérer la meilleure note de l'examen portant l'id : 87 ?
+
+- Requête à saisir :
+select max(note) from lpecom_examens where id_examen = 87;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select max(note) from lpecom_examens where id_examen = 87;
++-----------+
+| max(note) |
++-----------+
+|        14 |
++-----------+
+
+
+
+	Exercice 5
+Quelle requête utiliser pour afficher l'id des étudiants qui ont eu plus de 11 à l'examen 45 ou plus de
+12 à l'examen 87 ?
+
+Requête à saisir :
 
 
 
