@@ -1,5 +1,5 @@
 ### Exercices SQL
-Il s'agit d'une suite d'exercices sur une base SQL afin de pratiquer les requête SQL
+Il s'agit d'une suite d'exercices sur une base SQL afin de pratiquer les requêtes SQL.
 
 Prérequis : Créer une base de données (ici : "lpecom_bdd"), importer les données et l'utiliser (requête : use lpecom_bdd;)
 
