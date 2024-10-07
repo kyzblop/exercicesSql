@@ -22,6 +22,7 @@ select * from lpecom_livres;
 |        3 | T'choupi se brosse les dents | 2092589547 | Thierry Courtin         |  5.7 |
 |        4 | La Dernière Chasse           | 2226439412 | Jean-Christophe Grangé  | 22.9 |
 |        5 | Le Signal                    | 2226319484 | Maxime Chattam          | 23.9 |
+
 <br>
 
 
@@ -266,6 +267,37 @@ plus, si c'est possible, le prénom et le nom de l'étudiant ?_
 ```
 select lpecom_examens.id, lpecom_examens.id_examen, lpecom_examens.id_etudiant, lpecom_examens.matiere, lpecom_examens.note,
 lpecom_etudiants.prenom, lpecom_etudiants.nom from lpecom_examens
+left join lpecom_etudiants on lpecom_examens.id_etudiant = lpecom_etudiants.id_etudiant;
+```
+
+- Resultat :
+
+| id  | id_examen | id_etudiant | matiere             | note | prenom   | nom      |
+|-----|-----------|-------------|---------------------|------|----------|----------|
+| 788 |        45 |          30 | Histoire-Geographie | 10.5 | Joseph   | Biblo    |
+| 789 |        87 |          33 | Mathématiques       |   14 | Ted      | Bundy    |
+| 790 |        87 |          34 | Mathématiques       |    4 | Caroline | Martinez |
+| 791 |        45 |          31 | Histoire-Geographie | 15.5 | Paul     | Bismuth  |
+| 792 |        45 |          32 | Histoire-Geographie |    8 | Jean     | Michel   |
+| 793 |        87 |          31 | Mathématiques       |   14 | Paul     | Bismuth  |
+| 794 |        45 |          33 | Histoire-Geographie |  9.5 | Ted      | Bundy    |
+| 795 |        45 |          36 | Histoire-Geographie |   13 | NULL     | NULL     |
+| 796 |        45 |          34 | Histoire-Geographie |   17 | Caroline | Martinez |
+| 797 |        87 |          30 | Mathématiques       |  7.5 | Joseph   | Biblo    |
+
+
+<br>
+
+## Exercice 7
+_Quelle requête utiliser pour afficher les enregistrements de la table lpecom_examens avec le
+prénom et le nom de l'étudiant, uniquement quand les étudiants sont présents dans la table
+lpecom_etudiants ?_
+
+- Requête à saisir :
+
+```
+select lpecom_examens.id, lpecom_examens.id_examen, lpecom_examens.id_etudiant, lpecom_examens.matiere, lpecom_examens.note,
+lpecom_etudiants.prenom, lpecom_etudiants.nom from lpecom_examens
 inner join lpecom_etudiants on lpecom_examens.id_etudiant = lpecom_etudiants.id_etudiant;
 ```
 
@@ -284,5 +316,46 @@ inner join lpecom_etudiants on lpecom_examens.id_etudiant = lpecom_etudiants.id_
 | 796 |        45 |          34 | Histoire-Geographie |   17 | Caroline | Martinez |
 | 797 |        87 |          30 | Mathématiques       |  7.5 | Joseph   | Biblo    |
 
+<br>
+
+## Exercice 8
+_Quelle requête utiliser pour afficher uniquement le nom et le prénom de l'étudiant avec l'id : 30 avec
+la moyenne de ses deux examens dans une colonne moyenne ?_
+
+- Requête à saisir :
+```
+select lpecom_etudiants.nom, lpecom_etudiants.prenom, avg(lpecom_examens.note) as moyenne from lpecom_etudiants
+inner join lpecom_examens on lpecom_etudiants.id_etudiant = lpecom_examens.id_etudiant
+where lpecom_etudiants.id_etudiant = 30;
+```
+
+- Resultat :
+
+| nom   | prenom | moyenne |
+|-------|--------|---------|
+| Biblo | Joseph |       9 |
+
+<br>
+
+## Exercice 9
+_Quelle requête utiliser pour afficher les 3 meilleurs examens, du meilleur au moins bon, avec le
+prénom et le nom de l'étudiant associé ?_
+
+- Requête à saisir :
+```
+select lpecom_examens.id, lpecom_examens.id_examen, lpecom_examens.id_etudiant, lpecom_examens.matiere, lpecom_examens.note,
+lpecom_etudiants.prenom, lpecom_etudiants.nom from lpecom_examens
+inner join lpecom_etudiants on lpecom_examens.id_etudiant = lpecom_etudiants.id_etudiant
+order by lpecom_examens.note desc
+limit 3;
+```
+
+- Resultat :
+
+| id  | id_examen | id_etudiant | matiere             | note | prenom   | nom      |
+|-----|-----------|-------------|---------------------|------|----------|----------|
+| 796 |        45 |          34 | Histoire-Geographie |   17 | Caroline | Martinez |
+| 791 |        45 |          31 | Histoire-Geographie | 15.5 | Paul     | Bismuth  |
+| 793 |        87 |          31 | Math├®matiques       |   14 | Paul     | Bismuth  |
 
 
