@@ -3,7 +3,11 @@ Il s'agit d'une suite d'exercices sur une base SQL afin de pratiquer les requêt
 
 Prérequis : Créer une base de données (ici : "lpecom_bdd"), importer les données et l'utiliser (requête : use lpecom_bdd;)
 
-# Partie 1/
+<details>
+  <summary>
+    Partie 1
+  </summary>
+  
 ## Exercice 1
 _Quelle requête utiliser pour afficher l'ensemble des enregistrements de la table lpecom_livres ?_
 
@@ -163,8 +167,13 @@ select * from lpecom_livres limit 3 offset 1;
 |        4 | La Dernière Chasse           | 2226439412 | Jean-Christophe Grangé  | 22.9 |
 
 <br>
+</details>
 
-# Partie 2/
+<details>
+<summary>
+  Partie 2
+</summary>
+
 ## Exercice 1
 _Quelle requête utiliser pour afficher l'id des étudiants qui ont participé à au moins un examen ?_
 
@@ -356,6 +365,200 @@ limit 3;
 |-----|-----------|-------------|---------------------|------|----------|----------|
 | 796 |        45 |          34 | Histoire-Geographie |   17 | Caroline | Martinez |
 | 791 |        45 |          31 | Histoire-Geographie | 15.5 | Paul     | Bismuth  |
-| 793 |        87 |          31 | Math├®matiques       |   14 | Paul     | Bismuth  |
+| 793 |        87 |          31 | Mathématiques       |   14 | Paul     | Bismuth  |
+
+<br>
+</details>
+
+<details>
+  <summary>
+  Partie 3
+  </summary>
+  
 
 
+## Exercice 1
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT id, prenom, nom
+FROM lpecom_realisateurs
+WHERE nation = "us"
+AND sexe = 1;
+```
+
+Cette requête affiche l'id, le prénom et le nom des réalisatrices originaires des US.
+
+- Resultat :
+
+| id | prenom | nom     |
+|----|--------|---------|
+| 47 | Patty  | Jenkins |
+
+<br>
+
+## Exercice 2
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT *
+FROM lpecom_realisateurs
+WHERE sexe = "0"
+ORDER BY nom DESC
+LIMIT 1;
+```
+
+Cette requête affiche toutes les données des réalisateurs masculins rangés par ordre anti-alphabetique en ne prenant que la première valeur (soit le premier nom dans l'ordre anti-alphabetique)
+
+- Resultat :
+
+
+| id | nom   | prenom | sexe | nation |
+|----|-------|--------|------|--------|
+| 16 | Scott | Ridley |    0 | uk     |
+
+<br>
+
+## Exercice 3
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT f.id, f.nom AS film, r.prenom, r.nom
+FROM lpecom_films f
+INNER JOIN lpecom_realisateurs r ON f.id_realisateur = r.id
+ORDER BY f.id ASC;
+```
+
+Cette requête affiche l'id et le nom du film, ainsi que le nom et le prénom du réalisateur, rangés par ordre croissant par rapport à l'id, s'il a un réalisateur renseigné.
+
+- Resultat :
+
+| id  | film                | prenom | nom       |
+|-----|---------------------|--------|-----------|
+| 121 | Requiem for a Dream | Darren | Aronofsky |
+| 546 | Gladiator           | Ridley | Scott     |
+| 775 | Blade Runner        | Ridley | Scott     |
+| 984 | Seul sur Mars       | Ridley | Scott     |
+| 986 | Black Swan          | Darren | Aronofsky |
+| 987 | Wonder Woman        | Patty  | Jenkins   |
+
+<br>
+
+## Exercice 4
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT f.id, f.nom AS film, r.prenom, r.nom
+FROM lpecom_films f
+LEFT JOIN lpecom_realisateurs r ON f.id_realisateur = r.id
+ORDER BY f.id ASC;
+```
+
+Cette requête affiche l'id et le nom du film, ainsi que le nom et le prénom du réalisateur, rangés par ordre croissant par rapport à l'id, même s'il n'y a pas de réalisateur renseigné.
+
+- Resultat :
+
+| id  | film                | prenom | nom       |
+|-----|---------------------|--------|-----------|
+| 121 | Requiem for a Dream | Darren | Aronofsky |
+| 546 | Gladiator           | Ridley | Scott     |
+| 666 | Fight Club          | NULL   | NULL      |
+| 775 | Blade Runner        | Ridley | Scott     |
+| 984 | Seul sur Mars       | Ridley | Scott     |
+| 986 | Black Swan          | Darren | Aronofsky |
+| 987 | Wonder Woman        | Patty  | Jenkins   |
+| 988 | The Tomorrow Man    | NULL   | NULL      |
+
+<br>
+
+## Exercice 5
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT f.id, f.nom, fn.note
+FROM lpecom_films f
+LEFT JOIN lpecom_films_notes fn ON f.id = fn.id_film
+ORDER BY f.id ASC;
+```
+
+Cette requête affiche l'id, le nom, et la note des films, rangés par ordre croissant d'id, même si le film ne possède pas de note.
+
+- Resultat :
+
+| id  | nom                 | note |
+|-----|---------------------|------|
+| 121 | Requiem for a Dream |    1 |
+| 546 | Gladiator           |  4.5 |
+| 546 | Gladiator           |  2.5 |
+| 666 | Fight Club          |  4.2 |
+| 775 | Blade Runner        |    5 |
+| 984 | Seul sur Mars       |  3.5 |
+| 986 | Black Swan          |  4.3 |
+| 986 | Black Swan          |    3 |
+| 987 | Wonder Woman        |  3.1 |
+| 988 | The Tomorrow Man    | NULL |
+
+<br>
+
+## Exercice 6
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT f.nom, r.prenom AS realisateur_prenom, r.nom AS realisateur_nom, AVG(fn.note) AS
+moyenne_note
+FROM lpecom_films f
+INNER JOIN lpecom_realisateurs r ON f.id_realisateur = r.id
+INNER JOIN lpecom_films_notes fn ON f.id = fn.id_film
+WHERE f.id = 546;
+```
+
+Cette requête affiche le nom des film, les nom et prénom du réalisateur, et la note moyenne du film dont l'id = 546.
+
+- Resultat :
+
+| nom       | realisateur_prenom | realisateur_nom | ASmoyenne_note |
+|-----------|--------------------|-----------------|----------------|
+| Gladiator | Ridley             | Scott           |            3.5 |
+
+<br>
+
+## Exercice 7
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT r.nation, AVG(fn.note) AS moyenne_note
+FROM lpecom_films f
+INNER JOIN lpecom_realisateurs r ON f.id_realisateur = r.id
+INNER JOIN lpecom_films_notes fn ON f.id = fn.id_film
+WHERE r.nation = 'us';
+```
+
+Cette requête affiche la nationnalité des réalisateurs et la moyenne des notes des films issus de réalisateurs d'origine US.
+
+- Resultat :
+
+| nation | moyenne_note      |
+|--------|-------------------|
+| us     | 2.850000023841858 |
+
+<br>
+
+## Exercice 8
+_Quel est le résultat de la requête ci-dessous ?_
+
+```
+SELECT r.nation, MAX(fn.note) AS max_note
+FROM lpecom_films f
+INNER JOIN lpecom_realisateurs r ON f.id_realisateur = r.id
+INNER JOIN lpecom_films_notes fn ON f.id = fn.id_film
+WHERE r.nation = 'uk';
+```
+
+Cette requête affiche la nationnalité et la note maximale des films issus de réalisateur originaire du Royaume-Unis.
+
+| nation | max_note |
+|--------|----------|
+| uk     |        5 |
+
+
+</details>
