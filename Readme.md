@@ -32,7 +32,8 @@ _Quelle requête utiliser pour sélectionner uniquement les livres qui ont un pr
 
 - Requêtes à saisir :
 ```
-select * from lpecom_livres where prix >20;
+select * from lpecom_livres
+where prix > 20;
 ```
 
 - Resultat :
@@ -53,7 +54,8 @@ au prix le plus bas ?_
 
 - Requête à saisir :
 ```
-select * from lpecom_livres order by prix desc;
+select * from lpecom_livres
+order by prix desc;
 ```
 
 - Resultat :
@@ -90,7 +92,8 @@ entre 20 et 22 ?_
 
 - Requête à saisir :
 ```
-select * from lpecom_livres where prix between 20 and 22;
+select * from lpecom_livres
+where prix between 20 and 22;
 ```
 
 - Resultat :
@@ -109,7 +112,8 @@ portant la valeur pour la colonne isbn_10 : 2092589547 ?_
 
 - Requête à saisir :
 ```
-select * from lpecom_livres where not isbn_10 = 2092589547;
+select * from lpecom_livres
+where not isbn_10 = 2092589547;
 ```
 
 - Resultat :
@@ -202,7 +206,8 @@ _Quelle requête utiliser pour calculer la moyenne de l'examen portant l'id : 45
 
 - Requête à saisir :
 ```
-select avg(note) from lpecom_examens where id_examen = 45;
+select avg(note) from lpecom_examens
+where id_examen = 45;
 ```
 
 - Resultat :
@@ -218,7 +223,8 @@ _Quelle requête utiliser pour récupérer la meilleure note de l'examen portant
 
 - Requête à saisir :
 ```
-select max(note) from lpecom_examens where id_examen = 87;
+select max(note) from lpecom_examens
+where id_examen = 87;
 ```
 
 - Resultat :
@@ -235,7 +241,9 @@ _Quelle requête utiliser pour afficher l'id des étudiants qui ont eu plus de 1
 
 - Requête à saisir :
 ```
-select id_etudiant from lpecom_examens where id_examen = 45 and note > 11 or (id_examen = 87 and note > 12);
+select id_etudiant from lpecom_examens
+where id_examen = 45 and note > 11
+or (id_examen = 87 and note > 12);
 ```
 
 - Resultat :
@@ -247,4 +255,34 @@ select id_etudiant from lpecom_examens where id_examen = 45 and note > 11 or (id
 |          31 |
 |          36 |
 |          34 |
+
+<br>
+
+## Exercice 6
+_Quelle requête utiliser pour afficher tous les enregistrements de la table lpecom_examens avec en
+plus, si c'est possible, le prénom et le nom de l'étudiant ?_
+
+- Requête à saisir :
+```
+select lpecom_examens.id, lpecom_examens.id_examen, lpecom_examens.id_etudiant, lpecom_examens.matiere, lpecom_examens.note,
+lpecom_etudiants.prenom, lpecom_etudiants.nom from lpecom_examens
+inner join lpecom_etudiants on lpecom_examens.id_etudiant = lpecom_etudiants.id_etudiant;
+```
+
+- Resultat :
+
+
+| id  | id_examen | id_etudiant | matiere             | note | prenom   | nom      |
+|-----|-----------|-------------|---------------------|------|----------|----------|
+| 788 |        45 |          30 | Histoire-Geographie | 10.5 | Joseph   | Biblo    |
+| 789 |        87 |          33 | Mathématiques       |   14 | Ted      | Bundy    |
+| 790 |        87 |          34 | Mathématiques       |    4 | Caroline | Martinez |
+| 791 |        45 |          31 | Histoire-Geographie | 15.5 | Paul     | Bismuth  |
+| 792 |        45 |          32 | Histoire-Geographie |    8 | Jean     | Michel   |
+| 793 |        87 |          31 | Mathématiques       |   14 | Paul     | Bismuth  |
+| 794 |        45 |          33 | Histoire-Geographie |  9.5 | Ted      | Bundy    |
+| 796 |        45 |          34 | Histoire-Geographie |   17 | Caroline | Martinez |
+| 797 |        87 |          30 | Mathématiques       |  7.5 | Joseph   | Biblo    |
+
+
 
