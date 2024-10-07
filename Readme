@@ -1,0 +1,156 @@
+Exercices SQL
+
+	Exercice 1
+Quelle requête utiliser pour afficher l'ensemble des enregistrements de la table lpecom_livres ?
+
+- Requêtes à saisir :
+use lpecom_bdd;
+select * from lpecom_livres;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select * from lpecom_livres;
++----------+------------------------------+------------+-------------------------+------+
+| id_livre | titre                        | isbn_10    | auteur                  | prix |
++----------+------------------------------+------------+-------------------------+------+
+|        1 | Forteresse digitale          | 2709626306 | Dan Brown               | 20.5 |
+|        2 | La jeune fille et la nuit     | 2253237620 | Guillaume Musso         | 21.9 |
+|        3 | T'choupi se brosse les dents | 2092589547 | Thierry Courtin         |  5.7 |
+|        4 | La Derni├¿re Chasse           | 2226439412 | Jean-Christophe Grang├®  | 22.9 |
+|        5 | Le Signal                    | 2226319484 | Maxime Chattam          | 23.9 |
++----------+------------------------------+------------+-------------------------+------+
+
+
+
+	Exercice 2
+Quelle requête utiliser pour sélectionner uniquement les livres qui ont un prix strictement supérieur à
+20 dans la table lpecom_livres ?
+
+- Requêtes à saisir :
+select * from lpecom_livres where prix >20;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select * from lpecom_livres where prix >20;
++----------+----------------------------+------------+-------------------------+------+
+| id_livre | titre                      | isbn_10    | auteur                  | prix |
++----------+----------------------------+------------+-------------------------+------+
+|        1 | Forteresse digitale        | 2709626306 | Dan Brown               | 20.5 |
+|        2 | La jeune fille et la nuit   | 2253237620 | Guillaume Musso         | 21.9 |
+|        4 | La Derni├¿re Chasse         | 2226439412 | Jean-Christophe Grang├®  | 22.9 |
+|        5 | Le Signal                  | 2226319484 | Maxime Chattam          | 23.9 |
++----------+----------------------------+------------+-------------------------+------+
+
+
+
+	Exercice 3
+Quelle requête utiliser pour trier les enregistrements de la table lpecom_livres du prix le plus élevé
+au prix le plus bas ?
+
+- Requête à saisir :
+select * from lpecom_livres order by prix desc;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select * from lpecom_livres order by prix desc;
++----------+------------------------------+------------+-------------------------+------+
+| id_livre | titre                        | isbn_10    | auteur                  | prix |
++----------+------------------------------+------------+-------------------------+------+
+|        5 | Le Signal                    | 2226319484 | Maxime Chattam          | 23.9 |
+|        4 | La Derni├¿re Chasse           | 2226439412 | Jean-Christophe Grang├®  | 22.9 |
+|        2 | La jeune fille et la nuit     | 2253237620 | Guillaume Musso         | 21.9 |
+|        1 | Forteresse digitale          | 2709626306 | Dan Brown               | 20.5 |
+|        3 | T'choupi se brosse les dents | 2092589547 | Thierry Courtin         |  5.7 |
++----------+------------------------------+------------+-------------------------+------+
+
+
+
+	Exercice 4
+Quelle requête utiliser pour récupérer le prix du livre le plus élevé de la table lpecom_livres ?
+
+- Requête à saisir :
+select max(prix) from lpecom_livres;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select max(prix) from lpecom_livres;
++-----------+
+| max(prix) |
++-----------+
+|      23.9 |
++-----------+
+
+
+	Exercice 5
+Quelle requête utiliser pour récupérer les livres de la table lpecom_livres qui ont un prix compris
+entre 20 et 22 ?
+
+- Requête à saisir :
+select * from lpecom_livres where prix between 20 and 22;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select * from lpecom_livres where prix between 20 and 22;
++----------+----------------------------+------------+-----------------+------+
+| id_livre | titre                      | isbn_10    | auteur          | prix |
++----------+----------------------------+------------+-----------------+------+
+|        1 | Forteresse digitale        | 2709626306 | Dan Brown       | 20.5 |
+|        2 | La jeune fille et la nuit   | 2253237620 | Guillaume Musso | 21.9 |
++----------+----------------------------+------------+-----------------+------+
+
+
+
+	Exercice 6
+Quelle requête utiliser pour récupérer tous les livres de la table lpecom_livres à l'exception de celui
+portant la valeur pour la colonne isbn_10 : 2092589547 ?
+
+- Requête à saisir :
+select * from lpecom_livres where not isbn_10 =2092589547;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select * from lpecom_livres where not isbn_10 =2092589547;
++----------+----------------------------+------------+-------------------------+------+
+| id_livre | titre                      | isbn_10    | auteur                  | prix |
++----------+----------------------------+------------+-------------------------+------+
+|        1 | Forteresse digitale        | 2709626306 | Dan Brown               | 20.5 |
+|        2 | La jeune fille et la nuit   | 2253237620 | Guillaume Musso         | 21.9 |
+|        4 | La Derni├¿re Chasse         | 2226439412 | Jean-Christophe Grang├®  | 22.9 |
+|        5 | Le Signal                  | 2226319484 | Maxime Chattam          | 23.9 |
++----------+----------------------------+------------+-------------------------+------+
+
+
+
+	Exercice 7
+Quelle requête utiliser pour récupérer le prix du livre le moins élevé de la table lpecom_livres en
+renommant la colonne dans les résultats par minus ?
+
+- Requête à saisir :
+select min(prix) as minus from lpecom_livres;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select min(prix) as minus from lpecom_livres;
++-------+
+| minus |
++-------+
+|   5.7 |
++-------+
+
+
+
+	Exercice 8
+Quelle requête utiliser pour sélectionner uniquement les 3 premiers résultats sans le tout premier de
+la table lpecom_livres ?
+
+- Requête à saisir :
+select * from lpecom_livres limit 3 offset 1;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select * from lpecom_livres limit 3 offset 1;
++----------+------------------------------+------------+-------------------------+------+
+| id_livre | titre                        | isbn_10    | auteur                  | prix |
++----------+------------------------------+------------+-------------------------+------+
+|        2 | La jeune fille et la nuit     | 2253237620 | Guillaume Musso         | 21.9 |
+|        3 | T'choupi se brosse les dents | 2092589547 | Thierry Courtin         |  5.7 |
+|        4 | La Derni├¿re Chasse           | 2226439412 | Jean-Christophe Grang├®  | 22.9 |
++----------+------------------------------+------------+-------------------------+------+
+
+
+
+
+
+
