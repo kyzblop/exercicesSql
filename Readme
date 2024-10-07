@@ -2,6 +2,7 @@ Exercices SQL
 
 Prérequis : Créer une base de données (ici : "lpecom_bdd"), importer les données et l'utiliser (requête : use lpecom_bdd;)
 
+Partie 1/
 	Exercice 1
 Quelle requête utiliser pour afficher l'ensemble des enregistrements de la table lpecom_livres ?
 
@@ -152,11 +153,34 @@ MariaDB [lpecom_bdd]> select * from lpecom_livres limit 3 offset 1;
 
 
 
-	Exercice 9
+Partie 2/
+	Exercice 1
 Quelle requête utiliser pour afficher l'id des étudiants qui ont participé à au moins un examen ?
 
 - Requête à saisir :
-select id_etudiant from lpecom_examens;
+select distinct id_etudiant from lpecom_examens;
+
+- Resultat :
+MariaDB [lpecom_bdd]> select distinct id_etudiant from lpecom_examens;
++-------------+
+| id_etudiant |
++-------------+
+|          30 |
+|          33 |
+|          34 |
+|          31 |
+|          32 |
+|          36 |
++-------------+
+
+
+
+	Exercice 2
+Quelle requête utiliser pour compter le nombre d'étudiants qui ont participé à au moins un examen ?
+
+- Requête à saisir :
+select distinct count(id_etudiant) from lpecom_etudiant;
+
 
 
 
