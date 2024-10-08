@@ -560,5 +560,105 @@ Cette requête affiche la nationnalité et la note maximale des films issus de r
 |--------|----------|
 | uk     |        5 |
 
+<br>
+
+</details>
+
+<details>
+  <summary>
+    Partie 4
+  </summary>
+
+## Exercice 1
+_Quelle requête utiliser pour retrouver la ville qui possède les coordonnées GPS suivantes :
+48.66913724637683, 1.87586057971015 ?_
+
+- Requête à saisir :
+
+```
+select name from lpecom_cities where gps_lat = 48.66913724637683 and gps_lng = 1.87586057971015;
+```
+
+- Resultat :
+
+| name                        |
+|-----------------------------|
+| Vieille-Eglise-en-Yvelines  |
+
+<br>
+
+## Exercice 2
+_Sans jointure, quelle requête utiliser pour calculer le nombre de villes que compte le département de
+l'Essonne ?_
+
+- Requête à saisir :
+
+```
+select count(distinct name) from lpecom_cities where department_code = 91;
+```
+
+- Resultat :
+
+| count(name) |
+|-------------|
+|         196 |
+
+<br>
+
+## Exercice 3
+_Sans jointure, quelle requête utiliser pour calculer le nombre de villes en Île-de-France se terminant
+par '-le-Roi' ?_
+
+- Requête à saisir :
+
+```
+select count(distinct name) from lpecom_cities where department_code in (75, 77, 78, 91, 92, 93, 94, 95) and name like '%-le-Roi';
+```
+
+- Resultat :
+
+| count(distinct name) |
+|----------------------|
+|                   11 |
+
+<br>
+
+## Exercice 4
+_Combien de villes possèdent le code postal (zip_code) 77320 ? Renommez la colonne de résultat
+n_cities._
+
+- Requête à saisir :
+
+```
+select count(distinct name) as n_cities from lpecom_cities where zip_code = 77320;
+```
+
+- Resultat :
+
+| n_cities |
+|----------|
+|       22 |
+
+<br>
+
+## Exercice 5
+_Sans jointure, quelle requête utiliser pour calculer le nombre de villes commençant par 'Saint-' en
+Seine-et-Marne ?_
+
+- Requête à saisir :
+
+```
+select count(distinct name) from lpecom_cities where department_code = 77 and name like 'Saint-%';
+```
+
+- Resultat :
+
+| count(distinct name) |
+|----------------------|
+|                   36 |
+
+<br>
+
+
 
 </details>
