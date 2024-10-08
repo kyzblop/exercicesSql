@@ -796,7 +796,7 @@ where d.code = 77;
 - Resultat :
 
 | Region         | Departement    | Ville                       |
-+----------------+----------------+-----------------------------+
+|----------------|----------------|-----------------------------|
 | Ile-de-France  | Seine-et-Marne | Achères-la-Forêt            |
 | Ile-de-France  | Seine-et-Marne | Amillis                     |
 | Ile-de-France  | Seine-et-Marne | Amponville                  |
