@@ -1069,5 +1069,228 @@ select r.name from lpecom_regions r inner join lpecom_covid c on r.code = c.id_r
 
 <br>
 
+## Exercice 10
+_Quelle requête utiliser pour calculer la couverture moyenne entre les différentes régions à la date la
+plus récente, pour les vaccinations une et deux doses ?
+Vous renommez les colonnes de résultats : couverture_dose1_avg et couverture_dose2_avg_
+
+- Requête à saisir :
+
+```
+select avg(couv_dose1) as couverture_dose1_avg, avg(couv_dose2) as couverture_dose2_avg from lpecom_covid where jour='2021-04-06';
+```
+
+- Resultat :
+
+| couverture_dose1_avg | couverture_dose2_avg |
+|----------------------|----------------------|
+|            11.425000 |             4.115000 |
+
+<br>
+
+## Exercice 11
+_Quelle requête utiliser pour afficher les données de vaccination des régions (avec leur nom) qui
+possèdent une couveture vaccinale supérieure à 15 %
+pour la première dose et supérieure à 5 % pour la deuxième dose ?_
+
+- Requête à saisir :
+
+```
+select c.*, r.name from lpecom_covid c inner join lpecom_regions r on c.id_region = r.code where c.couv_dose1 > 15 and (c.couv_dose2 > 5) and (c.jour = '2021-04-06');
+```
+
+- Resultat :
+
+| id   | id_region | jour       | n_dose1 | n_dose2 | n_cum_dose1 | n_cum_dose2 | couv_dose1 | couv_dose2 | name                        |
+|------|-----------|------------|---------|---------|-------------|-------------|------------|------------|-----------------------------|
+| 1010 | 27        | 2021-04-06 |    8750 |    5673 |      452564 |      164656 |      16.30 |       5.90 | Bourgogne-Franche-Comté     |
+| 1111 | 28        | 2021-04-06 |    9709 |    7044 |      521581 |      177864 |      15.80 |       5.40 | Normandie                   |
+| 1313 | 44        | 2021-04-06 |   11863 |    9593 |      836877 |      294393 |      15.20 |       5.30 | Grand Est                   |
+| 1515 | 53        | 2021-04-06 |   11720 |    5454 |      515527 |      183113 |      15.40 |       5.50 | Bretagne                    |
+| 1616 | 75        | 2021-04-06 |   24230 |   10300 |      976357 |      333583 |      16.30 |       5.60 | Nouvelle-Aquitaine          |
+| 1717 | 76        | 2021-04-06 |   20502 |    8909 |      893235 |      314350 |      15.10 |       5.30 | Occitanie                   |
+| 1919 | 93        | 2021-04-06 |   19503 |    7831 |      823968 |      276597 |      16.30 |       5.50 | Provence-Alpes-Côte d'Azur  |
+| 2020 | 94        | 2021-04-06 |    1412 |     873 |       67780 |       27561 |      19.70 |       8.00 | Corse                       |
+
+<br>
+
+</details>
+
+<details>
+  <summary>
+    Partie 6
+  </summary>
+
+## Exercice 1
+_Sans jointure, quelle requête SQL utiliser pour afficher toutes les données de vaccination du 14
+février 2021 uniquement, pour le département de Seine-et-Marne (77) ?_
+
+- Requête à saisir :
+
+```
+select * from lpecom_covid_vaccin where dep_code = 77 and (jour = '2021-02-14');
+```
+
+- Resultat :
+
+| id   | dep_code | vaccin | jour       | n_dose1 | n_dose2 | n_cum_dose1 | n_cum_dose2 |
+|------|----------|--------|------------|---------|---------|-------------|-------------|
+|  354 | 77       |      1 | 2021-02-14 |       4 |      57 |       30268 |       11080 |
+|  455 | 77       |      2 | 2021-02-14 |       0 |       0 |          11 |           0 |
+|  556 | 77       |      3 | 2021-02-14 |       7 |       0 |         913 |           0 |
+| 2576 | 77       |      0 | 2021-02-14 |      11 |      57 |       31192 |       11080 |
+
+<br>
+
+## Exercice 2
+_Sans jointure, quelle requête SQL utiliser pour afficher le cumul de toutes les données de
+vaccination pour tous les vaccins du 14 février 2021 uniquement, pour les départements de
+l'Essonne (91) et de la Seine-et-Marne (77) ?_
+
+```
+select * from lpecom_covid_vaccin where jour = '2021-02-14' and (dep_code = 91 or dep_code = 77);
+```
+
+- Resultat :
+
+| id   | dep_code | vaccin | jour       | n_dose1 | n_dose2 | n_cum_dose1 | n_cum_dose2 |
+|------|----------|--------|------------|---------|---------|-------------|-------------|
+|  354 | 77       |      1 | 2021-02-14 |       4 |      57 |       30268 |       11080 |
+|  455 | 77       |      2 | 2021-02-14 |       0 |       0 |          11 |           0 |
+|  556 | 77       |      3 | 2021-02-14 |       7 |       0 |         913 |           0 |
+|  960 | 91       |      1 | 2021-02-14 |       8 |      90 |       32750 |        7808 |
+| 1061 | 91       |      2 | 2021-02-14 |       0 |       0 |           0 |           0 |
+| 1162 | 91       |      3 | 2021-02-14 |       0 |       0 |         890 |           0 |
+| 2576 | 77       |      0 | 2021-02-14 |      11 |      57 |       31192 |       11080 |
+| 2778 | 91       |      0 | 2021-02-14 |       8 |      90 |       33640 |        7808 |
+
+<br>
+
+## Exercice 3
+_Sans jointure, quelle requête utiliser pour afficher la somme des vaccinations première dose
+réalisées uniquement avec le vaccin AstraZeneka pour le mois de février 2021 pour le département
+de la Seine-et-Marne (77) ?_
+
+- Requête à saisir :
+
+```
+select sum(n_dose1) from lpecom_covid_vaccin where vaccin = 3 and dep_code = 77 and jour like '2021-02-%';
+```
+
+- Resultat :
+
+| sum(n_dose1) |
+|--------------|
+|         3667 |
+
+<br>
+
+## Exercice 4
+_Sans jointure, quelle requête utiliser pour afficher la somme des vaccinations deuxième dose
+réalisées avec le vaccin AstraZeneka ou Moderna pour le mois de mars 2021 pour le département
+de la Seine-et-Marne (77) ?_
+
+- Requête à saisir :
+
+```
+select sum(n_dose2) from lpecom_covid_vaccin where vaccin in (2, 3) and dep_code = 77 and jour like '2021-03-%';
+```
+
+- Resultat :
+
+| sum(n_dose2) |
+|--------------|
+|           32 |
+
+<br>
+
+## Exercice 5
+_Sans jointure, quelle requête utiliser pour afficher le record de vaccination première dose avec un
+type de vaccin en une seule journée ?
+Avec une deuxième requête qui exploitera une jointure, afficher toutes les informations possibles
+pour cette journée record et sur le type de vaccin._
+
+- Requêtes à saisir :
+
+```
+select max(n_dose1) from lpecom_covid_vaccin where not vaccin = 0;
+select v.*, t.nom from lpecom_covid_vaccin v inner join lpecom_covid_vaccin_type t on v.vaccin = t.id where v.n_dose1 = 7494;
+```
+
+- Resultats :
+
+| max(n_dose1) |
+|--------------|
+|         7494 |
+
+| id  | dep_code | vaccin | jour       | n_dose1 | n_dose2 | n_cum_dose1 | n_cum_dose2 | nom         |
+|-----|----------|--------|------------|---------|---------|-------------|-------------|-------------|
+| 279 | 75       |      3 | 2021-03-12 |    7494 |       2 |       62834 |          52 | AstraZeneka |
+
+<br>
+
+## Exercice 6
+_Sans jointure, quelle requête utiliser pour afficher le record de vaccination deuxième dose avec un
+type de vaccin en une seule journée ?
+Avec une deuxième requête qui exploitera deux jointures, afficher toutes les informations possibles
+pour cette journée record, sur le type de vaccin et sur le département._
+
+- Requête à saisir :
+
+```
+select max(n_dose2) from lpecom_covid_vaccin where not vaccin = 0;
+select v.*, t.nom, d.name from lpecom_covid_vaccin v inner join lpecom_covid_vaccin_type t on v.vaccin = t.id
+inner join lpecom_departments d on v.dep_code = d.code where v.n_dose1 = 5046;
+```
+
+- Resultats :
+
+| max(n_dose2) |
+|--------------|
+|         5046 |
+
+| id  | dep_code | vaccin | jour       | n_dose1 | n_dose2 | n_cum_dose1 | n_cum_dose2 | nom         | name  |
+|-----|----------|--------|------------|---------|---------|-------------|-------------|-------------|-------|
+| 279 | 75       |      3 | 2021-03-12 |    7494 |       2 |       62834 |          52 | AstraZeneka | Paris |
+
+<br>
+
+## Exercice 7
+_Quelle requête permet de savoir quel département possède le plus grand nombre d'injections
+première dose pour le vaccin AstraZeneka ?
+Avec une deuxième requête, afficher uniquement les colonnes suivantes : le nom du vaccin ; le jour ; le nom et le code du département ; le nombre cumulé d'injections._
+
+- Requêtes à saisir :
+
+```
+select max(c.n_cum_dose1), d.name from lpecom_covid_vaccin c inner join lpecom_departments d on c.dep_code = d.code where c.vaccin = 3;
+select v.nom as nomVaccin, c.jour, d.name as nomDep, d.code, c.n_cum_dose1 from lpecom_covid_vaccin c
+inner join lpecom_covid_vaccin_type v on c.vaccin = v.id
+inner join lpecom_departments d on c.dep_code = d.code
+where c.n_cum_dose1 = 122709;
+```
+
+- Resultats :
+
+| max(c.n_cum_dose1) | name  |
+|--------------------|-------|
+|             122709 | Paris |
+
+| nomVaccin   | jour       | nomDep | code | n_cum_dose1 |
+|-------------|------------|--------|------|-------------|
+| AstraZeneka | 2021-04-06 | Paris  | 75   |      122709 |
+
+<br>
+
+## Exercice 8
+_Quelle requête permet de savoir quel département a eu le moins de vaccinations première dose
+POEC Java Sophia - septembre 2024 ----- Jaouad Assabbour
+Initiation SQL - Exercices VI / Sixième partie
+avec le vaccin COMIRNATY Pfizer/BioNTech ?
+Avec une deuxième requête, afficher uniquement les colonnes suivantes : le nom du vaccin ; le jour ; le nom et le code du département ; le nombre cumulé d'injections._
+
+- Requête à saisir :
+
+
 
 </details>
