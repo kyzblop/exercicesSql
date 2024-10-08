@@ -867,33 +867,33 @@ _Quelle requête utiliser pour afficher toutes les données de vaccination uniqu
 - Requête à saisir :
 
 ```
-select c.*, r.name from lpecom_covid c left join lpecom_regions r on r.id = c.id_region where jour = '2021-04-01';
+select c.*, r.name from lpecom_covid c left join lpecom_regions r on r.code = c.id_region where jour = '2021-04-01';
 ```
 
 - Resultat :
 
-| id   | id_region | jour       | n_dose1 | n_dose2 | n_cum_dose1 | n_cum_dose2 | couv_dose1 | couv_dose2 | name                     |
-|------|-----------|------------|---------|---------|-------------|-------------|------------|------------|--------------------------|
-|   96 | 01        | 2021-04-01 |     425 |     160 |       10200 |        3834 |       2.70 |       1.00 | Guadeloupe               |
-|  197 | 02        | 2021-04-01 |     889 |     160 |       14579 |        5088 |       4.10 |       1.40 | Martinique               |
-|  298 | 03        | 2021-04-01 |     331 |     267 |        9812 |        4550 |       3.40 |       1.60 | Guyane                   |
-|  399 | 04        | 2021-04-01 |     676 |     698 |       38033 |       20045 |       4.40 |       2.30 | La Réunion               |
-|  500 | 06        | 2021-04-01 |     191 |     106 |        9289 |        4304 |       3.30 |       1.50 | Île-de-France            |
-|  601 | 07        | 2021-04-01 |      58 |      30 |         647 |         230 |       6.50 |       2.30 | Centre-Val de Loire      |
-|  702 | 08        | 2021-04-01 |      55 |      45 |        1181 |         642 |       3.30 |       1.80 | Bourgogne-Franche-Comté  |
-|  803 | 11        | 2021-04-01 |   42359 |   19709 |     1398310 |      400046 |      11.40 |       3.30 | Grand Est                |
-|  904 | 24        | 2021-04-01 |   11786 |    3071 |      328935 |      128834 |      12.90 |       5.00 | NULL                     |
-| 1005 | 27        | 2021-04-01 |   13868 |    3758 |      426598 |      154511 |      15.30 |       5.60 | NULL                     |
-| 1106 | 28        | 2021-04-01 |   17181 |    5110 |      483475 |      159637 |      14.60 |       4.80 | NULL                     |
-| 1207 | 32        | 2021-04-01 |   17501 |   10004 |      819580 |      224681 |      13.70 |       3.80 | NULL                     |
-| 1308 | 44        | 2021-04-01 |   22720 |    8593 |      791990 |      270775 |      14.40 |       4.90 | NULL                     |
-| 1409 | 52        | 2021-04-01 |   18219 |    3305 |      465913 |      163045 |      12.30 |       4.30 | NULL                     |
-| 1510 | 53        | 2021-04-01 |   17518 |    3965 |      478127 |      171912 |      14.30 |       5.10 | NULL                     |
-| 1611 | 75        | 2021-04-01 |   33921 |    6380 |      899615 |      313916 |      15.00 |       5.20 | NULL                     |
-| 1712 | 76        | 2021-04-01 |   32981 |    5157 |      823665 |      296753 |      13.90 |       5.00 | NULL                     |
-| 1813 | 84        | 2021-04-01 |   35047 |    9568 |     1045812 |      348968 |      13.00 |       4.30 | NULL                     |
-| 1914 | 93        | 2021-04-01 |   27929 |    7182 |      762341 |      253866 |      15.10 |       5.00 | NULL                     |
-| 2015 | 94        | 2021-04-01 |    1593 |     650 |       61435 |       22805 |      17.80 |       6.60 | NULL                     |
+| id   | id_region | jour       | n_dose1 | n_dose2 | n_cum_dose1 | n_cum_dose2 | couv_dose1 | couv_dose2 | name                        |
+|------|-----------|------------|---------|---------|-------------|-------------|------------|------------|-----------------------------|
+|   96 | 01        | 2021-04-01 |     425 |     160 |       10200 |        3834 |       2.70 |       1.00 | Guadeloupe                  |
+|  197 | 02        | 2021-04-01 |     889 |     160 |       14579 |        5088 |       4.10 |       1.40 | Martinique                  |
+|  298 | 03        | 2021-04-01 |     331 |     267 |        9812 |        4550 |       3.40 |       1.60 | Guyane                      |
+|  399 | 04        | 2021-04-01 |     676 |     698 |       38033 |       20045 |       4.40 |       2.30 | La Réunion                  |
+|  500 | 06        | 2021-04-01 |     191 |     106 |        9289 |        4304 |       3.30 |       1.50 | Mayotte                     |
+|  601 | 07        | 2021-04-01 |      58 |      30 |         647 |         230 |       6.50 |       2.30 | NULL                        |
+|  702 | 08        | 2021-04-01 |      55 |      45 |        1181 |         642 |       3.30 |       1.80 | NULL                        |
+|  803 | 11        | 2021-04-01 |   42359 |   19709 |     1398310 |      400046 |      11.40 |       3.30 | Île-de-France               |
+|  904 | 24        | 2021-04-01 |   11786 |    3071 |      328935 |      128834 |      12.90 |       5.00 | Centre-Val de Loire         |
+| 1005 | 27        | 2021-04-01 |   13868 |    3758 |      426598 |      154511 |      15.30 |       5.60 | Bourgogne-Franche-Comté     |
+| 1106 | 28        | 2021-04-01 |   17181 |    5110 |      483475 |      159637 |      14.60 |       4.80 | Normandie                   |
+| 1207 | 32        | 2021-04-01 |   17501 |   10004 |      819580 |      224681 |      13.70 |       3.80 | Hauts-de-France             |
+| 1308 | 44        | 2021-04-01 |   22720 |    8593 |      791990 |      270775 |      14.40 |       4.90 | Grand Est                   |
+| 1409 | 52        | 2021-04-01 |   18219 |    3305 |      465913 |      163045 |      12.30 |       4.30 | Pays de la Loire            |
+| 1510 | 53        | 2021-04-01 |   17518 |    3965 |      478127 |      171912 |      14.30 |       5.10 | Bretagne                    |
+| 1611 | 75        | 2021-04-01 |   33921 |    6380 |      899615 |      313916 |      15.00 |       5.20 | Nouvelle-Aquitaine          |
+| 1712 | 76        | 2021-04-01 |   32981 |    5157 |      823665 |      296753 |      13.90 |       5.00 | Occitanie                   |
+| 1813 | 84        | 2021-04-01 |   35047 |    9568 |     1045812 |      348968 |      13.00 |       4.30 | Auvergne-Rhône-Alpes        |
+| 1914 | 93        | 2021-04-01 |   27929 |    7182 |      762341 |      253866 |      15.10 |       5.00 | Provence-Alpes-Côte d'Azur  |
+| 2015 | 94        | 2021-04-01 |    1593 |     650 |       61435 |       22805 |      17.80 |       6.60 | Corse                       |
 
 <br>
 
@@ -922,13 +922,14 @@ région avec le code 93 uniquement pour le mois de mars 2021 ?_
 - Requête à saisir :
 
 ```
-select sum(n_cum_dose1) from lpecom_covid where id_region = 93 and (jour like '2021-03-%');
+select sum(n_dose1) from lpecom_covid where id_region = 93 and (jour like '2021-03-%');
 ```
 
 - Resultat :
-| sum(n_cum_dose1) |
-|------------------|
-|         14645406 |
+
+| sum(n_dose1) |
+|--------------|
+|       485530 |
 
 <br>
 
@@ -939,14 +940,132 @@ région avec le code 11 uniquement pour le mois de mars 2021 ?_
 - Requête à saisir :
 
 ```
-select sum(n_cum_dose2) from lpecom_covid where id_region = 11 and (jour like '2021-03-%');
+select sum(n_dose2) from lpecom_covid where id_region = 11 and (jour like '2021-03-%');
 ```
 
 - Resultat :
 
-| sum(n_cum_dose2) |
-|------------------|
-|          9830605 |
+| sum(n_dose2) |
+|--------------|
+|       149931 |
+
+<br>
+
+## Exercice 6
+_Quelle requête SQL utiliser pour afficher le record de vaccination première dose en une seule
+journée ?
+Avec une deuxième requête, afficher les informations de la région concernée, dont son nom, ainsi
+que le jour du record._
+
+- Requêtes à saisir :
+
+```
+select max(n_dose1) from lpecom_covid;
+select r.*, c.jour from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.n_dose1 = 56661;
+```
+
+- Resultats :
+
+| max(n_dose1) |
+|--------------|
+|        56661 |
+
+| id | code | name           | slug          | jour       |
+|----|------|----------------|---------------|------------|
+|  6 | 11   | Île-de-France  | ile de france | 2021-03-26 |
+
+<br>
+
+## Exercice 7
+_Quelle requête utiliser pour afficher le record de vaccination deuxième dose en une seule journée ?
+Avec une deuxième requête, afficher les informations de la région concernée, dont son nom, ainsi
+que le jour du record._
+
+- Requêtes à saisir :
+
+```
+select max(n_dose2) from lpecom_covid;
+select r.*, c.jour from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.n_dose2 = 21524;
+```
+
+- Resultats :
+
+| max(n_dose2) |
+|--------------|
+|        21524 |
+
+| id | code | name           | slug          | jour       |
+|----|------|----------------|---------------|------------|
+|  6 | 11   | Île-de-France  | ile de france | 2021-04-02 |
+
+<br>
+
+## Exercice 8
+_Quelles requêtes permettent de connaitre quelle région possède la plus grande couverture de
+vaccination avec une dose et deux doses ?
+Vous aurez besoin de 4 requêtes pour répondre aux deux questions. Vous aurez besoin du résultat
+de la première requête pour la deuxième._
+
+- Requêtes à saisir :
+
+Pour la première dose :
+```
+select max(couv_dose1) from lpecom_covid;
+select r.name from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.couv_dose1 = 19.70;
+```
+
+Pour la seconde dose :
+
+```
+select max(couv_dose2) from lpecom_covid;
+select r.name from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.couv_dose2 = 8.00;
+```
+
+- Resultats :
+
+Pour la première dose :
+
+| max(couv_dose1) |
+|-----------------|
+|           19.70 |
+
+| name  |
+|-------|
+| Corse |
+
+Pour la seconde dose :
+
+| max(couv_dose2) |
+|-----------------|
+|            8.00 |
+
+| name  |
+|-------|
+| Corse |
+
+<br>
+
+## Exercice 9
+_Quelle requête utiliser pour afficher le nom de la région qui a le plus faible taux de couverture de
+vaccination avec une dose ?
+Vous aurez besoin de 2 requêtes pour répondre à la question._
+
+- Requêtes à saisir :
+
+```
+select min(couv_dose1) from lpecom_covid where jour='2021-04-06';
+select r.name from lpecom_regions r inner join lpecom_covid c on r.code = c.id_region where c.jour = '2021-04-06' and c.couv_dose1 = 2.80;
+```
+
+- Resultats :
+
+| min(couv_dose1) |
+|-----------------|
+|            2.80 |
+
+| name       |
+|------------|
+| Guadeloupe |
 
 <br>
 
