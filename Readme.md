@@ -1321,7 +1321,48 @@ where c.n_cum_dose1 = 90832;
 
 <br>
 
+## Exercice 9
+_Quelle requête permet de connaître la moyenne de vaccinations première dose dans tous les
+départements pour le vaccin Moderna ?
+Renommer la colonne de résultat avec avg_moderna._
 
+- Requête à saisir :
+
+```
+select avg(n_dose1) as avg_moderna from lpecom_covid_vaccin where jour ='2021-04-06' and vaccin = 2;
+```
+
+- Resultat :
+
+| avg_moderna |
+|-------------|
+|    662.8750 |
+
+<br>
+
+## Exercice 10
+_Quelle requête utiliser pour afficher les départements (avec leur nom) qui possèdent un nombre
+d'injections deuxième dose avec le vaccin Moderna supérieur à 9000
+ou un nombre d'injections première dose avec le vaccin COMIRNATY Pfizer/BioNTech supérieur à
+120000 ? Vous aurez besoin de deux jointures._
+
+- Requête à saisir :
+
+```
+select distinct d.name from lpecom_departments d
+inner join lpecom_covid_vaccin c on c.dep_code = d.code
+where (c.vaccin = 2 and c.n_cum_dose2 > 9000) or (c.vaccin = 1 and c.n_cum_dose1 > 120000);
+```
+- Resultat :
+
+| name              |
+|-------------------|
+| Paris             |
+| Hauts-de-Seine    |
+| Seine-Saint-Denis |
+| Val-de-Marne      |
+
+<br>
 
 
 </details>
