@@ -1292,8 +1292,6 @@ where c.n_cum_dose1 = 122709;
 
 ## Exercice 8
 _Quelle requête permet de savoir quel département a eu le moins de vaccinations première dose
-POEC Java Sophia - septembre 2024 ----- Jaouad Assabbour
-Initiation SQL - Exercices VI / Sixième partie
 avec le vaccin COMIRNATY Pfizer/BioNTech ?
 Avec une deuxième requête, afficher uniquement les colonnes suivantes : le nom du vaccin ; le jour ; le nom et le code du département ; le nombre cumulé d'injections._
 
@@ -1364,5 +1362,21 @@ where (c.vaccin = 2 and c.n_cum_dose2 > 9000) or (c.vaccin = 1 and c.n_cum_dose1
 
 <br>
 
+</details>
 
+<details>
+  <summary>
+    Partie 7
+  </summary>
+
+## Exercice 1
+_Quelle requête SQL utiliser pour compter, sans doublons, le nombre de professionnels de santé en
+Seine-et-Marne (77) ?_
+
+- Requête à saisir :
+
+```
+
+```
+  
 </details>
