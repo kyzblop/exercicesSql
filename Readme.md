@@ -728,7 +728,8 @@ ainsi que le nom et le slug de la région associée._
 - Requête à saisir :
 
 ```
-select d.name as Departement, r.name as Region, r.slug from lpecom_departments d inner join lpecom_regions r on d.region_code = r.code where r.code in (75, 27, 53, 84, 93);
+select d.name as Departement, r.name as Region, r.slug from lpecom_departments d
+inner join lpecom_regions r on d.region_code = r.code where r.code in (75, 27, 53, 84, 93);
 ```
 
 - Resultat :
