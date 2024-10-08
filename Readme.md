@@ -659,6 +659,159 @@ select count(distinct name) from lpecom_cities where department_code = 77 and na
 
 <br>
 
+## Exercice 6
+_Quelles villes possèdent un code postal (zip_code) compris entre 77210 et 77810 ?_
 
+- Requête à saisir :
+
+```
+select name from lpecom_cities where zip_code between 77210 and 77810;
+```
+
+- Resultat :
+
+| name                        |
+|-----------------------------|
+| Achères-la-Forêt            |
+| Amponville                  |
+| Andrezel                    |
+|...|
+| Voulangis                   |
+| Voulton                     |
+| Yèbles                      |
+
+La requête affiche 317 lignes de resultat, le tableau a donc été tronqué ici.
+
+<br>
+
+## Exercice 7
+_Sans jointure, quelles sont les deux villes de Seine-et-Marne à avoir le code postal (zip_code) le
+plus grand ?_
+
+- Requête à saisir :
+
+```
+select name, zip_code from lpecom_cities where department_code = 77 order by zip_code desc  limit 2;
+```
+
+- Resultat :
+
+| name             | zip_code |
+|------------------|----------|
+| Mauregard        | 77990    |
+| Le Mesnil-Amelot | 77990    |
+
+<br>
+
+## Exercice 8
+_Quel est le code postal (zip_code) le plus grand de la table lpecom_cities ?_
+
+- Requête à saisir :
+
+```
+select max(zip_code) from lpecom_cities;
+```
+
+- Resultat :
+- 
+| max(zip_code) |
+|---------------|
+| 95880         |
+
+<br>
+
+## Exercice 9
+_Avec un seul WHERE et aucun OR, quelle est la requête permettant d'afficher les départements des
+régions ayant le code suivant : 75, 27, 53, 84 et 93 ? Le résultat doit afficher le nom du département
+ainsi que le nom et le slug de la région associée._
+
+- Requête à saisir :
+
+```
+select d.name as Departement, r.name as Region, r.slug from lpecom_departments d inner join lpecom_regions r on d.region_code = r.code where r.code in (75, 27, 53, 84, 93);
+```
+
+- Resultat :
+
+| Departement             | Region                      | slug                      |
+|-------------------------|-----------------------------|---------------------------|
+| Côte-d'Or               | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Doubs                   | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Jura                    | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Nièvre                  | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Haute-Saône             | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Saône-et-Loire          | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Yonne                   | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Territoire de Belfort   | Bourgogne-Franche-Comté     | bourgogne franche comte   |
+| Côtes-d'Armor           | Bretagne                    | bretagne                  |
+| Finistère               | Bretagne                    | bretagne                  |
+| Ille-et-Vilaine         | Bretagne                    | bretagne                  |
+| Morbihan                | Bretagne                    | bretagne                  |
+| Charente                | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Charente-Maritime       | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Corrèze                 | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Creuse                  | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Dordogne                | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Gironde                 | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Landes                  | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Lot-et-Garonne          | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Pyrénées-Atlantiques    | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Deux-Sèvres             | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Vienne                  | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Haute-Vienne            | Nouvelle-Aquitaine          | nouvelle aquitaine        |
+| Ain                     | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Allier                  | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Ardèche                 | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Cantal                  | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Drôme                   | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Isère                   | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Loire                   | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Haute-Loire             | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Puy-de-Dôme             | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Rhône                   | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Savoie                  | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Haute-Savoie            | Auvergne-Rhône-Alpes        | auvergne rhone alpes      |
+| Alpes-de-Haute-Provence | Provence-Alpes-Côte d'Azur  | provence alpes cote dazur |
+| Hautes-Alpes            | Provence-Alpes-Côte d'Azur  | provence alpes cote dazur |
+| Alpes-Maritimes         | Provence-Alpes-Côte d'Azur  | provence alpes cote dazur |
+| Bouches-du-Rhône        | Provence-Alpes-Côte d'Azur  | provence alpes cote dazur |
+| Var                     | Provence-Alpes-Côte d'Azur  | provence alpes cote dazur |
+| Vaucluse                | Provence-Alpes-Côte d'Azur  | provence alpes cote dazur |
+
+<br>
+
+## Exercice 10
+_Quelle requête utiliser pour obtenir en résultat, les noms de la région, du département et de chaque
+ville du département ayant pour code 77 ?_
+
+- Requête à saisir :
+
+```
+select r.name as Region, d.name as Departement, c.name as Ville from lpecom_cities c
+inner join lpecom_departments d on d.code = c.department_code
+inner join lpecom_regions r on r.code = d.region_code
+where d.code = 77;
+```
+
+- Resultat :
+
+| Region         | Departement    | Ville                       |
++----------------+----------------+-----------------------------+
+| Ile-de-France  | Seine-et-Marne | Achères-la-Forêt            |
+| Ile-de-France  | Seine-et-Marne | Amillis                     |
+| Ile-de-France  | Seine-et-Marne | Amponville                  |
+| Ile-de-France  | Seine-et-Marne | Andrezel                    |
+| Ile-de-France  | Seine-et-Marne | Annet-sur-Marne             |
+| Ile-de-France  | Seine-et-Marne | Arbonne-la-Forêt            |
+| Ile-de-France  | Seine-et-Marne | Argentières                 |
+| ...|
+| Ile-de-France  | Seine-et-Marne | Voulx                       |
+| Ile-de-France  | Seine-et-Marne | Vulaines-lès-Provins        |
+| Ile-de-France  | Seine-et-Marne | Vulaines-sur-Seine          |
+| Ile-de-France  | Seine-et-Marne | Yèbles                      |
+
+La requête affiche 510 lignes de resultat, le tableau a donc été tronqué ici.
+
+<br>
 
 </details>
