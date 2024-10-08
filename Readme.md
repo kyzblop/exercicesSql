@@ -961,6 +961,7 @@ que le jour du record._
 
 ```
 select max(n_dose1) from lpecom_covid;
+
 select r.*, c.jour from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.n_dose1 = 56661;
 ```
 
@@ -985,6 +986,7 @@ que le jour du record._
 
 ```
 select max(n_dose2) from lpecom_covid;
+
 select r.*, c.jour from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.n_dose2 = 21524;
 ```
 
@@ -1011,6 +1013,7 @@ de la première requête pour la deuxième._
 Pour la première dose :
 ```
 select max(couv_dose1) from lpecom_covid;
+
 select r.name from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.couv_dose1 = 19.70;
 ```
 
@@ -1018,6 +1021,7 @@ Pour la seconde dose :
 
 ```
 select max(couv_dose2) from lpecom_covid;
+
 select r.name from lpecom_regions r inner join lpecom_covid c on c.id_region = r.code where c.couv_dose2 = 8.00;
 ```
 
@@ -1054,6 +1058,7 @@ Vous aurez besoin de 2 requêtes pour répondre à la question._
 
 ```
 select min(couv_dose1) from lpecom_covid where jour='2021-04-06';
+
 select r.name from lpecom_regions r inner join lpecom_covid c on r.code = c.id_region where c.jour = '2021-04-06' and c.couv_dose1 = 2.80;
 ```
 
@@ -1214,6 +1219,7 @@ pour cette journée record et sur le type de vaccin._
 
 ```
 select max(n_dose1) from lpecom_covid_vaccin where not vaccin = 0;
+
 select v.*, t.nom from lpecom_covid_vaccin v inner join lpecom_covid_vaccin_type t on v.vaccin = t.id where v.n_dose1 = 7494;
 ```
 
@@ -1239,6 +1245,7 @@ pour cette journée record, sur le type de vaccin et sur le département._
 
 ```
 select max(n_dose2) from lpecom_covid_vaccin where not vaccin = 0;
+
 select v.*, t.nom, d.name from lpecom_covid_vaccin v inner join lpecom_covid_vaccin_type t on v.vaccin = t.id
 inner join lpecom_departments d on v.dep_code = d.code where v.n_dose1 = 5046;
 ```
@@ -1264,6 +1271,7 @@ Avec une deuxième requête, afficher uniquement les colonnes suivantes : le nom
 
 ```
 select max(c.n_cum_dose1), d.name from lpecom_covid_vaccin c inner join lpecom_departments d on c.dep_code = d.code where c.vaccin = 3;
+
 select v.nom as nomVaccin, c.jour, d.name as nomDep, d.code, c.n_cum_dose1 from lpecom_covid_vaccin c
 inner join lpecom_covid_vaccin_type v on c.vaccin = v.id
 inner join lpecom_departments d on c.dep_code = d.code
@@ -1290,6 +1298,29 @@ avec le vaccin COMIRNATY Pfizer/BioNTech ?
 Avec une deuxième requête, afficher uniquement les colonnes suivantes : le nom du vaccin ; le jour ; le nom et le code du département ; le nombre cumulé d'injections._
 
 - Requête à saisir :
+
+```
+select d.name as nomDep, c.n_cum_dose1 from lpecom_departments d
+inner join lpecom_covid_vaccin c on d.code = c.dep_code
+where c.jour = '2021-04-06' and c.vaccin = 1 order by n_cum_dose1 limit 1;
+
+select v.nom , c.jour, d.name, d.code, n_cum_dose1 from lpecom_covid_vaccin c
+inner join lpecom_departments d on d.code = c.dep_code
+inner join lpecom_covid_vaccin_type v on v.id = c.vaccin
+where c.n_cum_dose1 = 90832;
+```
+- Resultats :
+
+| nomDep     | n_cum_dose1 |
+|------------|-------------|
+| Val-d'Oise |       90832 |
+
+| nom                       | jour       | name       | code | n_cum_dose1 |
+|---------------------------|------------|------------|------|-------------|
+| COMIRNATY Pfizer/BioNTech | 2021-04-06 | Val-d'Oise | 95   |       90832 |
+
+<br>
+
 
 
 
